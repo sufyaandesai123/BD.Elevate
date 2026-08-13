@@ -133,36 +133,63 @@ document.addEventListener('DOMContentLoaded', () => {
     statsObserver.observe(statsSection);
   }
 
-  /* ---------- Quote Form → mailto ---------- */
+  /* ---------- Quote Form Submission (FormSubmit.co API) ---------- */
   const quoteForm = document.getElementById('quote-form');
 
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
+      const submitBtn = document.getElementById('form-submit-btn');
+      const originalText = submitBtn.innerHTML;
+      
+      // Update button state
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending Request...';
+
       const formData = new FormData(quoteForm);
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        venue: formData.get('venue'),
+        floorSize: formData.get('floor-size'),
+        floorType: formData.get('floor-type'),
+        designIdea: formData.get('design-idea')
+      };
 
-      const name = formData.get('name') || '';
-      const email = formData.get('email') || '';
-      const venue = formData.get('venue') || '';
-      const floorSize = formData.get('floor-size') || '';
-      const floorType = formData.get('floor-type') || '';
-      const designIdea = formData.get('design-idea') || '';
-
-      const subject = encodeURIComponent(`Custom Quote Request from ${name}`);
-      const body = encodeURIComponent(
-        `--- BD Elevate Quote Request ---\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Venue Name & Location: ${venue}\n` +
-        `Estimated Floor Size / Dimensions: ${floorSize}\n` +
-        `Existing Floor Type: ${floorType}\n` +
-        `Design Idea:\n${designIdea}\n\n` +
-        `---\nSent from BD Elevate Website`
-      );
-
-      const mailtoLink = `mailto:bdelevate6@gmail.com?subject=${subject}&body=${body}`;
-      window.location.href = mailtoLink;
+      fetch("https://formsubmit.co/ajax/bdelevate6@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        submitBtn.innerText = 'Sent Successfully! ✓';
+        submitBtn.style.backgroundColor = '#28a745';
+        alert('Thank you! Your quote request has been sent in the background. If this is the first submission, FormSubmit will send an activation link to bdelevate6@gmail.com — please click it to start receiving quotes.');
+        quoteForm.reset();
+        
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.backgroundColor = '';
+        }, 4000);
+      })
+      .catch(error => {
+        console.error('Submission Error:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        submitBtn.style.backgroundColor = '';
+        alert('Oops! There was a problem submitting your request. Please try again.');
+      });
     });
   }
 

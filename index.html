@@ -23,7 +23,10 @@
   }
   </script>
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/image-removebg-preview.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-black.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
 <body>
 
@@ -33,7 +36,7 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="navbar__logo" id="nav-logo">
-        <img src="assets/image-removebg-preview.png" alt="BD Elevate Logo" />
+        <img src="assets/logo-white.svg" alt="BD Elevate logo" width="50" height="50" />
         <span class="navbar__logo-text">BD <span>Elevate</span></span>
       </a>
 
@@ -271,7 +274,20 @@
                 <span class="btn__arrow">→</span>
               </button>
             </div>
+
+            <p class="form-error" id="form-error" role="alert" hidden>
+              Sorry, something went wrong sending your request. Please try again, or call/text us at
+              <a href="tel:+16475103872">647-510-3872</a> or <a href="tel:+16472283747">647-228-3747</a>.
+            </p>
           </form>
+
+          <div class="form-success" id="form-success" tabindex="-1" hidden>
+            <div class="form-success__icon" aria-hidden="true">✓</div>
+            <h3 class="form-success__title">Thank you<span id="form-success-name"></span>!</h3>
+            <p class="form-success__text">Your quote request has been received. We'll get back to you within 24 hours with a custom quote.</p>
+            <p class="form-success__text form-success__text--small">Need an answer sooner? Call or text <a href="tel:+16475103872">647-510-3872</a> or <a href="tel:+16472283747">647-228-3747</a>.</p>
+            <button type="button" class="form-success__again" id="form-success-again">Send another request</button>
+          </div>
         </div>
       </div>
     </div>

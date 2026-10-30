@@ -135,6 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Quote Form Submission (FormSubmit.co API) ---------- */
   const quoteForm = document.getElementById('quote-form');
+  const successBox = document.getElementById('form-success');
+  const successName = document.getElementById('form-success-name');
+  const errorBox = document.getElementById('form-error');
+  const againBtn = document.getElementById('form-success-again');
 
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
@@ -143,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = document.getElementById('form-submit-btn');
       const originalText = submitBtn.innerHTML;
       
+      errorBox.hidden = true;
+
       // Update button state
       submitBtn.disabled = true;
       submitBtn.innerText = 'Sending Request...';
@@ -172,25 +178,35 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();
       })
       .then(data => {
-        submitBtn.innerText = 'Sent Successfully! ✓';
-        submitBtn.style.backgroundColor = '#28a745';
-        alert('Thank you! Your quote request has been sent in the background. If this is the first submission, FormSubmit will send an activation link to bdelevate6@gmail.com — please click it to start receiving quotes.');
+        if (data && (data.success === false || data.success === 'false')) {
+          throw new Error(data.message || 'Submission failed');
+        }
+        const firstName = (payload.name || '').trim().split(/\s+/)[0];
+        successName.textContent = firstName ? ', ' + firstName : '';
         quoteForm.reset();
-        
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.backgroundColor = '';
-        }, 4000);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        quoteForm.hidden = true;
+        successBox.hidden = false;
+        successBox.focus({ preventScroll: true });
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .catch(error => {
         console.error('Submission Error:', error);
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
-        submitBtn.style.backgroundColor = '';
-        alert('Oops! There was a problem submitting your request. Please try again.');
+        errorBox.hidden = false;
       });
     });
+
+    if (againBtn) {
+      againBtn.addEventListener('click', () => {
+        successBox.hidden = true;
+        quoteForm.hidden = false;
+        const firstField = quoteForm.querySelector('input, select, textarea');
+        if (firstField) firstField.focus();
+      });
+    }
   }
 
 

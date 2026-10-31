@@ -71,76 +71,103 @@
       <div class="gallery__header reveal">
         <span class="section-label">Our Work</span>
         <h1 class="section-heading" style="margin-top: 10px;">Dance Floor Wrap Gallery</h1>
-        <p class="section-subheading">A visual collection of premium custom wraps, bespoke monograms, and edge-to-edge custom event prints installed across Toronto and the GTA.</p>
+        <p class="section-subheading">Real floors we have designed and installed for weddings and events across Toronto and the GTA. Tap any photo to see it full screen.</p>
+      </div>
+
+      <div class="gallery__filters" role="group" aria-label="Filter photos by style">
+        <button type="button" class="gallery__filter is-active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="gallery__filter" data-filter="white" aria-pressed="false">White Floors</button>
+        <button type="button" class="gallery__filter" data-filter="monogram" aria-pressed="false">Monograms</button>
+        <button type="button" class="gallery__filter" data-filter="fullprint" aria-pressed="false">Full Print</button>
       </div>
 
       <div class="gallery__grid">
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-rd-grand-ballroom-800.jpg" srcset="assets/photos/monogram-rd-grand-ballroom-800.jpg 800w, assets/photos/monogram-rd-grand-ballroom-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="RD monogram dance floor wrap with names and date in a grand ballroom" width="800" height="1067" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="fullprint">
           <img src="assets/photos/full-print-floral-mehndi-800.jpg" srcset="assets/photos/full-print-floral-mehndi-800.jpg 800w, assets/photos/full-print-floral-mehndi-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Full-print floral floor wrap at a colourful mehndi stage" width="800" height="1067" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="fullprint">
           <img src="assets/photos/full-print-paisley-mehndi-800.jpg" srcset="assets/photos/full-print-paisley-mehndi-800.jpg 800w, assets/photos/full-print-paisley-mehndi-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Full-print paisley floor wrap in orange and blue at a mehndi stage" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="white">
           <img src="assets/photos/white-runway-floor-800.jpg" srcset="assets/photos/white-runway-floor-800.jpg 800w, assets/photos/white-runway-floor-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Long white glossy floor wrap running the length of a banquet hall" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-rm-script-800.jpg" srcset="assets/photos/monogram-rm-script-800.jpg 800w, assets/photos/monogram-rm-script-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Script monogram dance floor wrap with initials and wedding date" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-sh-crest-hall-800.jpg" srcset="assets/photos/monogram-sh-crest-hall-800.jpg 800w, assets/photos/monogram-sh-crest-hall-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Crest monogram on a white dance floor in front of a floral stage" width="800" height="1066" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="fullprint">
           <img src="assets/photos/full-print-floral-border-800.jpg" srcset="assets/photos/full-print-floral-border-800.jpg 800w, assets/photos/full-print-floral-border-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Full-print floor wrap with floral design and patterned border under a flower arch" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-hm-wreath-800.jpg" srcset="assets/photos/monogram-hm-wreath-800.jpg 800w, assets/photos/monogram-hm-wreath-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Wreath monogram dance floor wrap under a lit ceiling" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-dh-date-800.jpg" srcset="assets/photos/monogram-dh-date-800.jpg 800w, assets/photos/monogram-dh-date-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="D&H script monogram with wedding date on a glossy white floor" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="fullprint">
           <img src="assets/photos/full-print-paisley-wide-800.jpg" srcset="assets/photos/full-print-paisley-wide-800.jpg 800w, assets/photos/full-print-paisley-wide-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Long full-print paisley floor wrap under a crystal ceiling" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="white">
           <img src="assets/photos/white-glossy-floor-800.jpg" srcset="assets/photos/white-glossy-floor-800.jpg 800w, assets/photos/white-glossy-floor-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Glossy white dance floor wrap reflecting chandeliers" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-ds-colourful-stage-800.jpg" srcset="assets/photos/monogram-ds-colourful-stage-800.jpg 800w, assets/photos/monogram-ds-colourful-stage-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Monogram floor wrap in front of a colourful wedding stage" width="800" height="1061" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-ts-names-date-800.jpg" srcset="assets/photos/monogram-ts-names-date-800.jpg 800w, assets/photos/monogram-ts-names-date-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Monogram with couple names and date on a white floor wrap" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-jm-large-800.jpg" srcset="assets/photos/monogram-jm-large-800.jpg 800w, assets/photos/monogram-jm-large-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Large black monogram on a white dance floor wrap" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="white monogram">
           <img src="assets/photos/white-floor-long-hall-800.jpg" srcset="assets/photos/white-floor-long-hall-800.jpg 800w, assets/photos/white-floor-long-hall-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="White floor wrap covering a long hall under a lit ceiling" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-jj-night-to-remember-800.jpg" srcset="assets/photos/monogram-jj-night-to-remember-800.jpg 800w, assets/photos/monogram-jj-night-to-remember-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Monogram floor wrap reading A Night to Remember with date" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-um-hall-800.jpg" srcset="assets/photos/monogram-um-hall-800.jpg 800w, assets/photos/monogram-um-hall-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="U&M monogram on a white dance floor in a chandelier hall" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-ds-crest-800.jpg" srcset="assets/photos/monogram-ds-crest-800.jpg 800w, assets/photos/monogram-ds-crest-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Copper crest monogram on a white dance floor" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-sd-script-800.jpg" srcset="assets/photos/monogram-sd-script-800.jpg 800w, assets/photos/monogram-sd-script-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="Black script monogram with date on a glossy white floor" width="800" height="1067" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="white">
           <img src="assets/photos/white-floor-grand-hall-800.jpg" srcset="assets/photos/white-floor-grand-hall-800.jpg 800w, assets/photos/white-floor-grand-hall-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="White floor wrap in a grand hall with chandeliers" width="800" height="1403" loading="lazy" decoding="async" />
         </div>
-        <div class="gallery__item reveal">
+        <div class="gallery__item reveal" data-cat="monogram">
           <img src="assets/photos/monogram-hh-white-floor-800.jpg" srcset="assets/photos/monogram-hh-white-floor-800.jpg 800w, assets/photos/monogram-hh-white-floor-1200.jpg 1200w" sizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 33vw" alt="HH monogram and date on a white dance floor wrap" width="800" height="600" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Gallery CTA -->
+  <section class="gallery-cta">
+    <div class="container gallery-cta__inner">
+      <h2 class="gallery-cta__title">Like what you see?</h2>
+      <p class="gallery-cta__text">Tell us your date and venue and we'll design a floor for your event.</p>
+      <div class="gallery-cta__actions">
+        <a href="index.html#quote" class="btn btn--primary">Get a Custom Quote <span class="btn__arrow">→</span></a>
+        <a href="https://www.instagram.com/bd.elevate/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">More on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+    <img class="lightbox__img" id="lightbox-img" alt="" />
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+    <p class="lightbox__caption" id="lightbox-caption"></p>
+  </dialog>
 
   <!-- ============================
        FOOTER

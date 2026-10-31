@@ -334,6 +334,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }));
 
+    // Open a style straight from the homepage tiles (gallery.html#white etc.)
+    const fromHash = (location.hash || '').slice(1);
+    const hashBtn = document.querySelector(`.gallery__filter[data-filter="${fromHash}"]`);
+    if (hashBtn) hashBtn.click();
+
     const box = document.getElementById('lightbox');
     const boxImg = document.getElementById('lightbox-img');
     const boxCap = document.getElementById('lightbox-caption');

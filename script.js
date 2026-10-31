@@ -371,8 +371,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Instagram reels: load Instagram's player only when scrolled near ---------- */
   const reels = document.getElementById('reels');
   if (reels) {
+    let embedsRequested = false;
     const loadEmbeds = () => {
       if (window.instgrm) { window.instgrm.Embeds.process(); return; }
+      if (embedsRequested) return;
+      embedsRequested = true;
       const sc = document.createElement('script');
       sc.async = true;
       sc.src = 'https://www.instagram.com/embed.js';
@@ -387,6 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       loadEmbeds();
     }
+    // Backup: load anyway shortly after the page finishes loading
+    window.addEventListener('load', () => setTimeout(loadEmbeds, 3500));
   }
 
 });

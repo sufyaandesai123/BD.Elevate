@@ -1777,3 +1777,5 @@ ul {
   .reels__row::-webkit-scrollbar { display: none; }
   .reel { flex: 0 0 78%; scroll-snap-align: center; }
 }
+.reel iframe, .reel iframe.instagram-media { width: 100% !important; min-width: 0 !important; max-width: 100% !important; margin: 0 !important; border-radius: var(--radius-md) !important; }
+@media (max-width: 900px) { .reel { flex-basis: 84%; } }

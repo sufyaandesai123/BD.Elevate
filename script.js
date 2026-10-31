@@ -133,65 +133,130 @@ document.addEventListener('DOMContentLoaded', () => {
     statsObserver.observe(statsSection);
   }
 
-  /* ---------- Quote Form Submission (FormSubmit.co API) ---------- */
+  /* ---------- Quote Form: two steps + FormSubmit.co ---------- */
   const quoteForm = document.getElementById('quote-form');
   const successBox = document.getElementById('form-success');
   const successName = document.getElementById('form-success-name');
   const errorBox = document.getElementById('form-error');
   const againBtn = document.getElementById('form-success-again');
+  const isLiveSite = /(^|\.)bdelevate\.ca$/.test(window.location.hostname);
 
   if (quoteForm) {
+    const steps = quoteForm.querySelectorAll('.form-step');
+    const dots = quoteForm.querySelectorAll('.form-steps__dot');
+    const stepLabel = document.getElementById('form-steps-label');
+    const nextBtn = document.getElementById('form-next-btn');
+    const backBtn = document.getElementById('form-back-btn');
+    const dateInput = document.getElementById('field-date');
+    const dateHint = document.getElementById('date-hint');
+    const formTop = quoteForm.closest('.quote__form-wrapper');
+
+    // No past dates
+    const today = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    dateInput.min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+    // Wedding-season nudge (May to October)
+    dateInput.addEventListener('change', () => {
+      const month = Number((dateInput.value || '').slice(5, 7));
+      dateHint.hidden = !(month >= 5 && month <= 10);
+    });
+
+    const showStep = (n) => {
+      steps.forEach(s => { s.hidden = Number(s.dataset.step) !== n; });
+      dots.forEach(d => d.classList.toggle('is-active', Number(d.dataset.dot) <= n));
+      stepLabel.textContent = n === 1 ? 'Step 1 of 2: Your event' : 'Step 2 of 2: Your floor';
+      const first = quoteForm.querySelector(`.form-step[data-step="${n}"] input, .form-step[data-step="${n}"] select`);
+      if (first) first.focus({ preventScroll: true });
+      const top = formTop.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 16;
+      if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
+    };
+
+    const stepValid = (n) => {
+      const fields = quoteForm.querySelectorAll(`.form-step[data-step="${n}"] [required]`);
+      for (const f of fields) {
+        if (f.type === 'radio') {
+          if (!quoteForm.querySelector(`input[name="${f.name}"]:checked`)) {
+            f.closest('.chips').classList.add('chips--invalid');
+            f.focus();
+            return false;
+          }
+        } else if (!f.checkValidity()) {
+          f.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    };
+
+    quoteForm.querySelectorAll('input[name="style"]').forEach(r =>
+      r.addEventListener('change', () => r.closest('.chips').classList.remove('chips--invalid')));
+
+    nextBtn.addEventListener('click', () => { if (stepValid(1)) showStep(2); });
+    backBtn.addEventListener('click', () => showStep(1));
+
+    // Enter key on step 1 moves to step 2 instead of submitting
+    quoteForm.querySelector('.form-step[data-step="1"]').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        nextBtn.click();
+      }
+    });
+
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (!stepValid(1)) { showStep(1); return; }
+      if (!stepValid(2)) return;
 
+      errorBox.hidden = true;
       const submitBtn = document.getElementById('form-submit-btn');
       const originalText = submitBtn.innerHTML;
-      
-      errorBox.hidden = true;
-
-      // Update button state
       submitBtn.disabled = true;
       submitBtn.innerText = 'Sending Request...';
 
-      const formData = new FormData(quoteForm);
+      const fd = new FormData(quoteForm);
+      const size = fd.get('floor-size') || '';
+      const big = /^1,000|^2,000/.test(size);
       const payload = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        venue: formData.get('venue'),
-        floorSize: formData.get('floor-size'),
-        floorType: formData.get('floor-type'),
-        designIdea: formData.get('design-idea')
+        _subject: `${big ? 'PRIORITY ' : ''}Quote request: ${fd.get('event-date')} · ${size} · ${fd.get('style')}`,
+        _template: 'table',
+        _honey: fd.get('_honey') || '',
+        eventDate: fd.get('event-date'),
+        name: fd.get('name'),
+        phone: fd.get('phone'),
+        email: fd.get('email'),
+        venue: fd.get('venue'),
+        floorSize: size,
+        style: fd.get('style'),
+        floorType: fd.get('floor-type') || 'Not given',
+        designIdea: fd.get('design-idea') || 'Not given',
+        heardFrom: fd.get('heard-from') || 'Not given'
       };
 
-      fetch("https://formsubmit.co/ajax/bdelevate6@gmail.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
+      const send = isLiveSite
+        ? fetch('https://formsubmit.co/ajax/bdelevate6@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          }).then(r => { if (!r.ok) throw new Error('Network response was not ok'); return r.json(); })
+        : new Promise(resolve => setTimeout(() => resolve({ success: 'true', preview: true }), 700));
+
+      send.then(data => {
         if (data && (data.success === false || data.success === 'false')) {
           throw new Error(data.message || 'Submission failed');
         }
         const firstName = (payload.name || '').trim().split(/\s+/)[0];
         successName.textContent = firstName ? ', ' + firstName : '';
         quoteForm.reset();
+        dateHint.hidden = true;
+        showStep(1);
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
         quoteForm.hidden = true;
         successBox.hidden = false;
         successBox.focus({ preventScroll: true });
         successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error('Submission Error:', error);
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
@@ -203,10 +268,17 @@ document.addEventListener('DOMContentLoaded', () => {
       againBtn.addEventListener('click', () => {
         successBox.hidden = true;
         quoteForm.hidden = false;
-        const firstField = quoteForm.querySelector('input, select, textarea');
-        if (firstField) firstField.focus();
+        showStep(1);
       });
     }
+  }
+
+  /* ---------- Preview notice (not on the live site) ---------- */
+  if (!isLiveSite) {
+    const note = document.createElement('div');
+    note.className = 'preview-note';
+    note.textContent = 'Preview only: quote requests here are not sent.';
+    document.body.appendChild(note);
   }
 
 

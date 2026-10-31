@@ -367,4 +367,26 @@ document.addEventListener('DOMContentLoaded', () => {
     box.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1); x0 = null; });
   }
 
+
+  /* ---------- Instagram reels: load Instagram's player only when scrolled near ---------- */
+  const reels = document.getElementById('reels');
+  if (reels) {
+    const loadEmbeds = () => {
+      if (window.instgrm) { window.instgrm.Embeds.process(); return; }
+      const sc = document.createElement('script');
+      sc.async = true;
+      sc.src = 'https://www.instagram.com/embed.js';
+      sc.onload = () => { if (window.instgrm) window.instgrm.Embeds.process(); };
+      document.body.appendChild(sc);
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)) { loadEmbeds(); io.disconnect(); }
+      }, { rootMargin: '600px 0px' });
+      io.observe(reels);
+    } else {
+      loadEmbeds();
+    }
+  }
+
 });

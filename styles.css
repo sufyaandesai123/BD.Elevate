@@ -1819,3 +1819,4 @@ ul {
   .steps { padding: 10px 0 50px; }
   .steps__list { grid-template-columns: 1fr; gap: 10px; }
 }
+.form-optional { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--clr-grey); } .quote__form textarea { min-height: 90px; }

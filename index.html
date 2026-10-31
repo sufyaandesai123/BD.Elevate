@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" />
   <link rel="preload" as="image" href="assets/photos/hero-rd-1000.jpg" imagesrcset="assets/photos/hero-rd-700.jpg 700w, assets/photos/hero-rd-1000.jpg 1000w" imagesizes="(max-width: 1024px) 92vw, 42vw" />
-  <link rel="stylesheet" href="styles.css?v=20261030d" />
+  <link rel="stylesheet" href="styles.css?v=20261030e" />
   
   <!-- Business details for Google -->
   <script type="application/ld+json">
@@ -209,7 +209,7 @@
       <ul class="navbar__links" id="nav-links">
         <li><a href="#work" id="nav-work">Our Work</a></li>
         <li><a href="gallery.html" id="nav-gallery">Gallery</a></li>
-        <li><a href="tel:+16475103872" class="navbar__phone" id="nav-phone">647-510-3872</a></li>
+        <li><a href="tel:+16472283747" class="navbar__phone" id="nav-phone">647-228-3747</a></li>
         <li><a href="#quote" class="navbar__cta" id="nav-cta">Get a Quote</a></li>
       </ul>
     </div>
@@ -271,7 +271,7 @@
         </a>
       </div>
       <div class="work__cta">
-        <a href="gallery.html" class="btn btn--outline">See All Our Work</a>
+        <a href="gallery.html" class="btn btn--outline">See More</a>
       </div>
     </div>
   </section>
@@ -368,120 +368,44 @@
 
         <div class="quote__form-wrapper reveal reveal-delay-2">
           <form class="quote__form" id="quote-form" action="https://formsubmit.co/bdelevate6@gmail.com" method="POST" novalidate>
-            <div class="form-steps" aria-hidden="true">
-              <span class="form-steps__dot is-active" data-dot="1"></span>
-              <span class="form-steps__bar"></span>
-              <span class="form-steps__dot" data-dot="2"></span>
-              <span class="form-steps__label" id="form-steps-label">Step 1 of 2: Your event</span>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-name">Name <span class="required">*</span></label>
+                <input type="text" id="field-name" name="name" placeholder="Your name" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for="field-phone">Phone <span class="required">*</span></label>
+                <input type="tel" id="field-phone" name="phone" placeholder="647-555-1234" autocomplete="tel" inputmode="tel" pattern="[0-9()+\-. ]{10,}" required />
+              </div>
             </div>
 
-            <fieldset class="form-step" data-step="1">
-              <legend class="visually-hidden">Your event and contact details</legend>
+            <div class="form-row">
               <div class="form-group">
                 <label for="field-date">Event Date <span class="required">*</span></label>
                 <input type="date" id="field-date" name="event-date" required />
-                <p class="form-hint" id="date-hint" hidden>Popular wedding-season date: these book up fast, so send your request soon.</p>
               </div>
-
               <div class="form-group">
-                <label for="field-name">Name <span class="required">*</span></label>
-                <input type="text" id="field-name" name="name" placeholder="Your full name" autocomplete="name" required />
+                <label for="field-venue">Venue &amp; City <span class="required">*</span></label>
+                <input type="text" id="field-venue" name="venue" placeholder="e.g. Grand Ballroom, Brampton" required />
               </div>
+            </div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="field-phone">Phone <span class="required">*</span></label>
-                  <input type="tel" id="field-phone" name="phone" placeholder="647-555-1234" autocomplete="tel" inputmode="tel" pattern="[0-9()+\-. ]{10,}" required />
-                </div>
-                <div class="form-group">
-                  <label for="field-email">Email <span class="required">*</span></label>
-                  <input type="email" id="field-email" name="email" placeholder="you@email.com" autocomplete="email" required />
-                </div>
-              </div>
+            <div class="form-group">
+              <label for="field-details">Details <span class="form-optional">(optional)</span></label>
+              <textarea id="field-details" name="details" rows="3" placeholder="Floor size, style or design idea"></textarea>
+            </div>
 
-              <div class="form-submit">
-                <button type="button" class="btn btn--primary" id="form-next-btn">
-                  Next: Event Details
-                  <span class="btn__arrow">→</span>
-                </button>
-              </div>
-            </fieldset>
+            <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-            <fieldset class="form-step" data-step="2" hidden>
-              <legend class="visually-hidden">Floor details</legend>
-              <div class="form-group">
-                <label for="field-venue">Venue Name &amp; City <span class="required">*</span></label>
-                <input type="text" id="field-venue" name="venue" placeholder="e.g. The Grand Ballroom, Brampton" required />
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="field-floor-size">Floor Size <span class="required">*</span></label>
-                  <select id="field-floor-size" name="floor-size" required>
-                    <option value="" disabled selected>Select size</option>
-                    <option value="Under 500 sq ft">Under 500 sq ft</option>
-                    <option value="500-999 sq ft">500 to 999 sq ft</option>
-                    <option value="1,000-1,999 sq ft">1,000 to 1,999 sq ft</option>
-                    <option value="2,000+ sq ft">2,000+ sq ft (full hall)</option>
-                    <option value="Not sure">Not sure yet</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="field-floor-type">Existing Floor</label>
-                  <select id="field-floor-type" name="floor-type">
-                    <option value="" selected>Select (optional)</option>
-                    <option value="Hardwood">Hardwood</option>
-                    <option value="Tile">Tile</option>
-                    <option value="Concrete">Concrete</option>
-                    <option value="Carpet">Carpet</option>
-                    <option value="Other">Other / Not sure</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group" role="group" aria-labelledby="style-label">
-                <span class="form-label" id="style-label">Style <span class="required">*</span></span>
-                <div class="chips">
-                  <label class="chip"><input type="radio" name="style" value="White glossy" required /><span>White glossy</span></label>
-                  <label class="chip"><input type="radio" name="style" value="White matte" /><span>White matte</span></label>
-                  <label class="chip"><input type="radio" name="style" value="Custom monogram" /><span>Monogram</span></label>
-                  <label class="chip"><input type="radio" name="style" value="Full print" /><span>Full print</span></label>
-                  <label class="chip"><input type="radio" name="style" value="Not sure" /><span>Not sure</span></label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="field-design-idea">Design Idea</label>
-                <textarea id="field-design-idea" name="design-idea" placeholder="Names or initials, colours, theme, or anything else. You can also text us an inspiration photo at 647-510-3872."></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="field-source">How did you hear about us?</label>
-                <select id="field-source" name="heard-from">
-                  <option value="" selected>Select (optional)</option>
-                  <option value="Instagram">Instagram</option>
-                  <option value="Google">Google</option>
-                  <option value="Facebook">Facebook / Marketplace</option>
-                  <option value="Decorator or venue">Decorator or venue</option>
-                  <option value="Friend or family">Friend or family</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-              <div class="form-actions">
-                <button type="button" class="form-back" id="form-back-btn">← Back</button>
-                <button type="submit" class="btn btn--primary" id="form-submit-btn">
-                  Request Quote
-                  <span class="btn__arrow">→</span>
-                </button>
-              </div>
-            </fieldset>
+            <div class="form-submit">
+              <button type="submit" class="btn btn--primary" id="form-submit-btn">
+                Get Quote
+                <span class="btn__arrow">→</span>
+              </button>
+            </div>
 
             <p class="form-error" id="form-error" role="alert" hidden>
-              Sorry, something went wrong sending your request. Please try again, or call/text us at
-              <a href="tel:+16475103872">647-510-3872</a> or <a href="tel:+16472283747">647-228-3747</a>.
+              Sorry, something went wrong. Please try again, or call/text <a href="tel:+16472283747">647-228-3747</a> or <a href="tel:+16475103872">647-510-3872</a>.
             </p>
           </form>
 
@@ -523,6 +447,6 @@
     <a href="#quote" class="action-bar__item action-bar__item--primary" id="bar-quote">Get a Quote</a>
   </nav>
 
-  <script src="script.js?v=20261030d"></script>
+  <script src="script.js?v=20261030e"></script>
 </body>
 </html>

@@ -1759,3 +1759,4 @@ ul {
   .footer__info { align-items: center; }
 }
 .gallery__header .section-subheading, .insta__header .section-subheading { margin-left: auto; margin-right: auto; }
+#service-white .service-card__image img { object-position: center 35%; }

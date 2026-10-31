@@ -160,14 +160,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const fd = new FormData(quoteForm);
       const payload = {
-        _subject: `Quote request: ${fd.get('event-date')} · ${fd.get('venue')}`,
+        _subject: `${/^1,000|^2,000/.test(fd.get('floor-size') || '') ? 'PRIORITY ' : ''}Quote request: ${fd.get('event-date')} · ${fd.get('floor-size')} · ${fd.get('venue')}`,
         _template: 'table',
         _honey: fd.get('_honey') || '',
         name: fd.get('name'),
         phone: fd.get('phone'),
         eventDate: fd.get('event-date'),
         venue: fd.get('venue'),
-        details: fd.get('details') || 'Not given'
+        floorSize: fd.get('floor-size'),
+        design: fd.get('design')
       };
 
       const send = isLiveSite

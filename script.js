@@ -159,15 +159,21 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.innerText = 'Sending...';
 
       const fd = new FormData(quoteForm);
+      // Work out square footage from e.g. "30ft x 30ft" to flag big jobs
+      const nums = (fd.get('floor-size') || '').match(/\d+(\.\d+)?/g) || [];
+      const sqft = nums.length >= 2 ? parseFloat(nums[0]) * parseFloat(nums[1]) : 0;
+      const big = sqft >= 1000;
       const payload = {
-        _subject: `${/^1,000|^2,000/.test(fd.get('floor-size') || '') ? 'PRIORITY ' : ''}Quote request: ${fd.get('event-date')} · ${fd.get('floor-size')} · ${fd.get('venue')}`,
+        _subject: `${big ? 'PRIORITY ' : ''}Quote request: ${fd.get('event-date')} · ${fd.get('floor-size')} · ${fd.get('venue')}`,
         _template: 'table',
         _honey: fd.get('_honey') || '',
         name: fd.get('name'),
         phone: fd.get('phone'),
+        email: fd.get('email'),
         eventDate: fd.get('event-date'),
         venue: fd.get('venue'),
-        floorSize: fd.get('floor-size'),
+        floorSize: fd.get('floor-size') + (sqft ? ` (about ${Math.round(sqft)} sq ft)` : ''),
+        floorType: fd.get('floor-type'),
         design: fd.get('design')
       };
 

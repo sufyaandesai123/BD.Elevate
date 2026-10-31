@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" />
   <link rel="preload" as="image" href="assets/photos/hero-rd-1000.jpg" imagesrcset="assets/photos/hero-rd-700.jpg 700w, assets/photos/hero-rd-1000.jpg 1000w" imagesizes="(max-width: 1024px) 92vw, 42vw" />
-  <link rel="stylesheet" href="styles.css?v=20261030f" />
+  <link rel="stylesheet" href="styles.css?v=20261030g" />
   
   <!-- Business details for Google -->
   <script type="application/ld+json">
@@ -381,31 +381,41 @@
 
             <div class="form-row">
               <div class="form-group">
+                <label for="field-email">Email <span class="required">*</span></label>
+                <input type="email" id="field-email" name="email" placeholder="you@email.com" autocomplete="email" required />
+              </div>
+              <div class="form-group">
                 <label for="field-date">Event Date <span class="required">*</span></label>
                 <input type="date" id="field-date" name="event-date" required />
               </div>
-              <div class="form-group">
-                <label for="field-venue">Venue &amp; City <span class="required">*</span></label>
-                <input type="text" id="field-venue" name="venue" placeholder="e.g. Grand Ballroom, Brampton" required />
-              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="field-venue">Venue Name &amp; City <span class="required">*</span></label>
+              <input type="text" id="field-venue" name="venue" placeholder="e.g. Grand Ballroom, Brampton" required />
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="field-floor-size">Floor Size <span class="required">*</span></label>
-                <select id="field-floor-size" name="floor-size" required>
-                  <option value="" disabled selected>Select size</option>
-                  <option value="Under 500 sq ft">Under 500 sq ft</option>
-                  <option value="500-999 sq ft">500 to 999 sq ft</option>
-                  <option value="1,000-1,999 sq ft">1,000 to 1,999 sq ft</option>
-                  <option value="2,000+ sq ft">2,000+ sq ft (full hall)</option>
-                  <option value="Not sure">Not sure yet</option>
-                </select>
+                <input type="text" id="field-floor-size" name="floor-size" placeholder="e.g. 30ft x 30ft" required />
               </div>
               <div class="form-group">
-                <label for="field-design">Design <span class="required">*</span></label>
-                <input type="text" id="field-design" name="design" placeholder="e.g. white glossy, monogram with initials" required />
+                <label for="field-floor-type">Existing Floor <span class="required">*</span></label>
+                <select id="field-floor-type" name="floor-type" required>
+                  <option value="" disabled selected>Select floor type</option>
+                  <option value="Carpet">Carpet</option>
+                  <option value="Hardwood">Hardwood</option>
+                  <option value="Tile">Tile</option>
+                  <option value="Concrete">Concrete</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
+            </div>
+
+            <div class="form-group">
+              <label for="field-design">Design Details <span class="required">*</span></label>
+              <textarea id="field-design" name="design" rows="3" placeholder="e.g. white glossy, monogram with initials and date, colours, theme" required></textarea>
             </div>
 
             <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -460,6 +470,6 @@
     <a href="#quote" class="action-bar__item action-bar__item--primary" id="bar-quote">Get a Quote</a>
   </nav>
 
-  <script src="script.js?v=20261030f"></script>
+  <script src="script.js?v=20261030g"></script>
 </body>
 </html>
